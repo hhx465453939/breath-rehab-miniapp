@@ -1,0 +1,22 @@
+.filter-row { display: flex; align-items: center; }
+.filter-label { color: #59455A; font-weight: bold; margin-right: 20rpx; }
+.picker-value { background: #FDF6F1; border: 2rpx solid #F2C492; padding: 8rpx 24rpx; border-radius: 12rpx; color: #59455A; }
+.summary-row { display: flex; justify-content: space-between; }
+.summary-item { text-align: center; }
+.summary-num { font-size: 44rpx; font-weight: bold; color: #DD7180; }
+.summary-label { font-size: 22rpx; color: #99A9B7; }
+.section-title { font-size: 30rpx; font-weight: bold; margin-bottom: 16rpx; color: #59455A; }
+.chart-canvas { width: 100%; height: 320rpx; }
+.empty-chart { text-align: center; color: #99A9B7; font-size: 24rpx; padding: 40rpx 0; }
+.coach-box { background: #F0EAF5; border-radius: 12rpx; padding: 16rpx 20rpx; font-size: 26rpx; color: #59455A; }
+.rec-item { border-bottom: 1rpx solid #F2C492; padding: 16rpx 0; }
+.rec-head { display: flex; justify-content: space-between; }
+.rec-mode { font-weight: bold; color: #59455A; }
+.rec-date { font-size: 22rpx; color: #99A9B7; }
+.rec-body { margin-top: 6rpx; }
+.rec-data { font-size: 24rpx; color: #7A7EC4; }
+.rec-vs { display: flex; gap: 20rpx; font-size: 22rpx; margin-top: 6rpx; color: #59455A; }
+.rec-vs .up { color: #2153B8; }
+.rec-vs .down { color: #EA8CA9; }
+.rec-vs.no-vs { color: #99A9B7; }
+.empty { text-align: center; color: #99A9B7; padding: 30rpx 0; font-size: 24rpx; }

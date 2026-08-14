@@ -1,0 +1,63 @@
+/* app.wxss — 全局样式（S2 暮紫樱粉配色） */
+page {
+  background: #F5E8DF;
+  color: #333;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.container {
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.card {
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(89, 69, 90, 0.08);
+}
+
+.btn-primary {
+  background: #DD7180;
+  color: #fff;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  padding: 20rpx 0;
+  text-align: center;
+}
+
+.btn-secondary {
+  background: #FFFFFF;
+  color: #DD7180;
+  border: 2rpx solid #DD7180;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  padding: 18rpx 0;
+  text-align: center;
+}
+
+.btn-disabled {
+  background: #D1C7D0;
+  color: #fff;
+}
+
+.disclaimer {
+  color: #99A9B7;
+  font-size: 22rpx;
+  padding: 20rpx;
+  text-align: center;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  margin-right: 12rpx;
+}
+
+.tag-weak { background: #EA8CA9; color: #fff; }
+.tag-medium { background: #F2C492; color: #59455A; }
+.tag-strong { background: #2153B8; color: #fff; }

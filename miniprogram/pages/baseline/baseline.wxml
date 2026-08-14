@@ -1,0 +1,63 @@
+<view class="container">
+  <!-- 引导阶段 -->
+  <view class="card" wx:if="{{phase === 'intro'}}">
+    <view class="page-title">建立基线测试</view>
+    <view class="page-sub">每个康复周期都需要重新录制基线。共 3 口气 × 3 次 = 9 次吹气，约需 3 分钟。</view>
+
+    <view class="ref-box">
+      <view class="ref-title">您的参考区间（经验值）</view>
+      <view class="ref-row" wx:for="{{refLevels}}" wx:key="id">
+        <text class="ref-name">{{item.name}}</text>
+        <text class="ref-range">分贝 {{item.dbRange[0]}}-{{item.dbRange[1]}}dB · 时长 {{item.durRange[0]}}-{{item.durRange[1]}}s</text>
+      </view>
+      <view class="ref-note">* 参考区间为经验值，非医学标准，仅用于相对对比</view>
+    </view>
+
+    <view class="btn-primary" bindtap="startTest">开始基线测试</view>
+    <view class="btn-secondary" bindtap="skipTest">跳过（极限测试）</view>
+    <view class="skip-tip" wx:if="{{suggestBaseline}}">您处于{{phaseText}}阶段，建议完成基线后再训练，效果更佳</view>
+  </view>
+
+  <!-- 测试中 -->
+  <view class="card" wx:elif="{{phase === 'testing'}}">
+    <view class="test-progress">第 {{currentRound}} / 9 次 · {{currentLevelName}} · 重复 {{currentRepIndex}}/3</view>
+
+    <view class="candle-box" wx:if="{{mode !== 'countdown'}}">
+      <view class="candle {{candleLevel >= 3 ? 'out' : ''}}" wx:for="{{candles}}" wx:key="index">
+        <view class="flame {{candleLevel >= 2 ? 'flame-big' : candleLevel === 1 ? 'flame-small' : ''}}" wx:if="{{index < candleLevel}}"></view>
+        <view class="wick"></view>
+      </view>
+    </view>
+
+    <view class="db-display" wx:if="{{mode !== 'countdown'}}">{{currentDb}}<text class="db-unit">dB</text></view>
+    <view class="countdown" wx:if="{{mode === 'countdown'}}">{{countdown}}</view>
+    <view class="test-tip">{{tipText}}</view>
+
+    <view class="btn-primary" wx:if="{{!blowing}}" bindtap="startBreath">开始吹气</view>
+    <view class="btn-secondary" wx:if="{{blowing}}" bindtap="stopBreath">结束本次吹气</view>
+  </view>
+
+  <!-- 结果 -->
+  <view class="card" wx:if="{{phase === 'result'}}">
+    <view class="page-title">基线测试完成</view>
+
+    <view class="level-result" wx:for="{{levelResults}}" wx:key="id">
+      <view class="lr-name">{{item.name}}</view>
+      <view class="lr-data">峰值 {{item.peakDb}}dB · 时长 {{item.durationSec}}s</view>
+      <view class="lr-pos" wx:if="{{item.ratioText}}">{{item.ratioText}}</view>
+    </view>
+
+    <view class="overall">
+      <view class="overall-label">综合评级</view>
+      <view class="tag {{overall === 'strong' ? 'tag-strong' : overall === 'medium' ? 'tag-medium' : 'tag-weak'}}">{{overallText}}</view>
+    </view>
+
+    <view class="coach-box">{{coachText}}</view>
+    <view class="disclaimer">* 判定为相对自身参考值的经验判断，非医学诊断，仅供参考</view>
+
+    <view class="btn-primary" bindtap="finish">保存基线，开始训练</view>
+    <view class="btn-secondary" bindtap="retest">重新测试</view>
+  </view>
+
+  <view class="disclaimer">本工具非医疗器械，测量值仅供参考，不做医学诊断。请遵医嘱。</view>
+</view>

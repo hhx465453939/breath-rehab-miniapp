@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="card intro">
+    <view class="intro-title">什么是康复周期？</view>
+    <view class="intro-text">每个康复周期（如：手术前、手术后、ICU 出院后）都需要重新录制基线。训练记录会挂载到当前周期，并与该周期的基线对比。</view>
+  </view>
+
+  <view class="btn-primary" bindtap="onNewSession">＋ 新建康复周期（重新测基线）</view>
+
+  <view class="card">
+    <view class="section-title">周期列表</view>
+    <view class="sess-item" wx:for="{{sessions}}" wx:key="id" data-id="{{item.id}}" bindtap="onSwitch">
+      <view class="sess-head">
+        <text class="sess-title">{{item.title}}</text>
+        <text class="tag {{item.status === 'active' ? 'tag-strong' : ''}}">{{item.status === 'active' ? '当前' : '已归档'}}</text>
+        <text class="tag {{item.baseline ? 'tag-medium' : 'tag-weak'}}">{{item.baseline ? '已测基线' : '未测基线'}}</text>
+      </view>
+      <view class="sess-date">开始于 {{item.dateText}}</view>
+      <view class="sess-note" wx:if="{{item.note}}">{{item.note}}</view>
+      <view class="sess-profile">{{item.profileText}}</view>
+      <view class="sess-actions">
+        <view class="btn-secondary mini" catchtap="onRetestBaseline" data-id="{{item.id}}">测/重测基线</view>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{!sessions.length}}">暂无周期，点击上方按钮创建</view>
+  </view>
+
+  <view class="disclaimer">本工具非医疗器械，测量值仅供参考，不做医学诊断。</view>
+</view>

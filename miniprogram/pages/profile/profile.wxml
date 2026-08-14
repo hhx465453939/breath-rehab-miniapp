@@ -1,0 +1,88 @@
+<view class="container">
+  <view class="card">
+    <view class="page-title">首次使用，请先填写基本信息</view>
+    <view class="page-sub">这些信息用于生成相对自身的参考值，仅保存在本机</view>
+
+    <view class="form-item">
+      <view class="form-label">称呼</view>
+      <input class="form-input" placeholder="如：王阿姨" value="{{form.name}}" bindinput="onInput" data-field="name" />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">身份</view>
+      <view class="opt-row">
+        <view class="opt {{form.role === 'healthy' ? 'active' : ''}}" bindtap="onRole" data-role="healthy">健康人</view>
+        <view class="opt {{form.role === 'patient' ? 'active' : ''}}" bindtap="onRole" data-role="patient">病人</view>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">年龄</view>
+      <input class="form-input" type="number" placeholder="请输入年龄（周岁）" value="{{form.age}}" bindinput="onInput" data-field="age" />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">性别</view>
+      <view class="opt-row">
+        <view class="opt {{form.gender === 'male' ? 'active' : ''}}" bindtap="onGender" data-gender="male">男</view>
+        <view class="opt {{form.gender === 'female' ? 'active' : ''}}" bindtap="onGender" data-gender="female">女</view>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">原发病（基础疾病）</view>
+      <view class="opt-row wrap">
+        <view class="opt small {{form.diseases.indexOf('脑梗') > -1 ? 'active' : ''}}" bindtap="onDisease" data-d="脑梗">脑梗</view>
+        <view class="opt small {{form.diseases.indexOf('肺炎') > -1 ? 'active' : ''}}" bindtap="onDisease" data-d="肺炎">肺炎</view>
+        <view class="opt small {{form.diseases.indexOf('心功能不全') > -1 ? 'active' : ''}}" bindtap="onDisease" data-d="心功能不全">心功能不全</view>
+        <view class="opt small {{form.diseases.indexOf('COPD') > -1 ? 'active' : ''}}" bindtap="onDisease" data-d="COPD">COPD</view>
+        <view class="opt small {{form.diseases.indexOf('哮喘') > -1 ? 'active' : ''}}" bindtap="onDisease" data-d="哮喘">哮喘</view>
+      </view>
+      <input class="form-input" placeholder="其他疾病（选填）" value="{{form.diseaseOther}}" bindinput="onInput" data-field="diseaseOther" />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">近期是否做过手术</view>
+      <view class="opt-row">
+        <view class="opt {{form.surgery.done === true ? 'active' : ''}}" bindtap="onSurgery" data-v="1">是</view>
+        <view class="opt {{form.surgery.done === false ? 'active' : ''}}" bindtap="onSurgery" data-v="0">否</view>
+      </view>
+      <input wx:if="{{form.surgery.done}}" class="form-input" placeholder="手术类型/时间（选填）" value="{{form.surgery.time}}" bindinput="onInput" data-field="surgeryTime" />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">是否住过 ICU</view>
+      <view class="opt-row">
+        <view class="opt {{form.icu.admitted === true ? 'active' : ''}}" bindtap="onIcu" data-v="1">是</view>
+        <view class="opt {{form.icu.admitted === false ? 'active' : ''}}" bindtap="onIcu" data-v="0">否</view>
+      </view>
+      <view wx:if="{{form.icu.admitted}}">
+        <input class="form-input" placeholder="ICU 时长（如 2周）" value="{{form.icu.duration}}" bindinput="onInput" data-field="icuDuration" />
+        <view class="form-label small-label">是否已拔管/脱机</view>
+        <view class="opt-row">
+          <view class="opt {{form.icu.extubated === true ? 'active' : ''}}" bindtap="onExtubated" data-v="1">已拔管</view>
+          <view class="opt {{form.icu.extubated === false ? 'active' : ''}}" bindtap="onExtubated" data-v="0">未拔管</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">当前康复阶段</view>
+      <view class="opt-row wrap">
+        <view class="opt small {{form.rehabPhase === 'postICU' ? 'active' : ''}}" bindtap="onPhase" data-p="postICU">ICU 后康复</view>
+        <view class="opt small {{form.rehabPhase === 'perioperative' ? 'active' : ''}}" bindtap="onPhase" data-p="perioperative">围手术期</view>
+        <view class="opt small {{form.rehabPhase === 'chronic' ? 'active' : ''}}" bindtap="onPhase" data-p="chronic">慢性康复</view>
+        <view class="opt small {{form.rehabPhase === 'daily' ? 'active' : ''}}" bindtap="onPhase" data-p="daily">健康日常</view>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">使用方式说明</view>
+      <view class="hint">吹气时手机距离嘴巴约 15-20cm，请在安静环境下使用</view>
+    </view>
+
+    <view class="btn-primary" bindtap="onSave">保存并继续</view>
+  </view>
+
+  <view class="disclaimer">本工具非医疗器械，测量值仅供参考，不做医学诊断。</view>
+</view>

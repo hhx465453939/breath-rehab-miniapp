@@ -1,0 +1,69 @@
+<view class="container">
+  <!-- 周期筛选 -->
+  <view class="card filter-card">
+    <view class="filter-row">
+      <text class="filter-label">周期</text>
+      <picker mode="selector" range="{{sessionOptions}}" range-key="title" value="{{sessionIndex}}" bindchange="onSessionChange">
+        <view class="picker-value">{{sessionOptions[sessionIndex].title || '全部'}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 汇总 -->
+  <view class="card">
+    <view class="summary-row">
+      <view class="summary-item">
+        <view class="summary-num">{{totalCount}}</view>
+        <view class="summary-label">总次数</view>
+      </view>
+      <view class="summary-item">
+        <view class="summary-num">{{avgPeak}}</view>
+        <view class="summary-label">平均峰值dB</view>
+      </view>
+      <view class="summary-item">
+        <view class="summary-num">{{todayCount}}</view>
+        <view class="summary-label">今日次数</view>
+      </view>
+      <view class="summary-item">
+        <view class="summary-num">{{streak}}</view>
+        <view class="summary-label">连续天数</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 趋势折线图（峰值分贝） -->
+  <view class="card">
+    <view class="section-title">峰值分贝趋势</view>
+    <canvas type="2d" id="chartCanvas" class="chart-canvas"></canvas>
+    <view class="empty-chart" wx:if="{{!hasData}}">暂无训练数据，去完成一次训练吧</view>
+  </view>
+
+  <!-- 今日总结 -->
+  <view class="card" wx:if="{{hasData}}">
+    <view class="section-title">今日总结</view>
+    <view class="coach-box">{{todaySummary}}</view>
+  </view>
+
+  <!-- 记录列表 -->
+  <view class="card">
+    <view class="section-title">训练记录</view>
+    <view class="rec-item" wx:for="{{records}}" wx:key="id">
+      <view class="rec-head">
+        <text class="rec-mode">{{item.modeText}}</text>
+        <text class="rec-date">{{item.dateText}} {{item.timeText}}</text>
+      </view>
+      <view class="rec-body">
+        <text class="rec-data">峰值 {{item.peakDb}}dB · 时长 {{item.durationSec}}s · 稳定性 {{item.stability}}</text>
+      </view>
+      <view class="rec-vs" wx:if="{{item.vsBaseline}}">
+        <text>比基线</text>
+        <text class="{{item.vsBaseline.db >= 0 ? 'up' : 'down'}}">峰值 {{item.vsBaseline.db >= 0 ? '+' : ''}}{{item.vsBaseline.db}}dB</text>
+        <text class="{{item.vsBaseline.dur >= 0 ? 'up' : 'down'}}">时长 {{item.vsBaseline.dur >= 0 ? '+' : ''}}{{item.vsBaseline.dur}}s</text>
+      </view>
+      <view class="rec-vs no-vs" wx:else>未测基线</view>
+    </view>
+    <view class="empty" wx:if="{{!hasData}}">暂无记录</view>
+  </view>
+
+  <view class="disclaimer">本工具非医疗器械，测量值仅供参考，不做医学诊断。</view>
+</view>

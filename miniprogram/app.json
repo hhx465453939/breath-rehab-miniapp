@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/session/session",
+    "pages/history/history",
+    "pages/profile/profile",
+    "pages/baseline/baseline",
+    "pages/train/train"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#59455A",
+    "navigationBarTitleText": "吹气康复助手",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F5E8DF"
+  },
+  "tabBar": {
+    "color": "#99A9B7",
+    "selectedColor": "#DD7180",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/session/session",
+        "text": "周期"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "历史"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

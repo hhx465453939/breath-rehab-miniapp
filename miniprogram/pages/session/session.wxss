@@ -1,0 +1,12 @@
+.intro-title { font-size: 30rpx; font-weight: bold; color: #59455A; }
+.intro-text { font-size: 24rpx; color: #99A9B7; margin-top: 8rpx; }
+.section-title { font-size: 32rpx; font-weight: bold; margin-bottom: 20rpx; color: #59455A; }
+.sess-item { border: 2rpx solid #F2C492; border-radius: 16rpx; padding: 20rpx; margin-bottom: 16rpx; background: #FDF6F1; }
+.sess-head { display: flex; align-items: center; }
+.sess-title { font-size: 30rpx; font-weight: bold; color: #59455A; margin-right: 12rpx; }
+.sess-date { font-size: 22rpx; color: #99A9B7; margin-top: 6rpx; }
+.sess-note { font-size: 24rpx; color: #8a5a00; margin-top: 6rpx; }
+.sess-profile { font-size: 22rpx; color: #99A9B7; margin-top: 6rpx; }
+.sess-actions { margin-top: 12rpx; }
+.btn-secondary.mini { display: inline-block; padding: 6rpx 24rpx; font-size: 24rpx; }
+.empty { text-align: center; color: #99A9B7; padding: 40rpx 0; font-size: 24rpx; }

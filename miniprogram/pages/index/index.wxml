@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="card header">
+    <view class="hello">{{greeting}}，{{profile.name || '用户'}}</view>
+    <view class="sub">{{profileText}}</view>
+  </view>
+
+  <view class="card session-info" wx:if="{{activeSession}}">
+    <view class="row">
+      <text class="label">当前周期</text>
+      <text class="value">{{activeSession.title}}</text>
+    </view>
+    <view class="row">
+      <text class="label">基线状态</text>
+      <text class="value {{activeSession.baseline ? 'ok' : 'warn'}}">{{activeSession.baseline ? '已测基线 · ' + baselineLevelText : '未测基线'}}</text>
+    </view>
+    <view class="baseline-tip" wx:if="{{!activeSession.baseline && suggestBaseline}}">
+      您处于{{phaseText}}阶段，建议先完成基线测试再开始训练。
+      <view class="btn-secondary mini" bindtap="goBaseline">去补测基线</view>
+    </view>
+    <view class="baseline-tip" wx:elif="{{!activeSession.baseline}}">
+      尚未建立基线，训练将不计算相对差值。可随时补测。
+      <view class="btn-secondary mini" bindtap="goBaseline">去补测基线</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">选择训练模式</view>
+    <view class="mode-grid">
+      <view class="mode-item" wx:for="{{modes}}" wx:key="id" bindtap="startTrain" data-mode="{{item.id}}">
+        <view class="mode-emoji">{{item.emoji}}</view>
+        <view class="mode-name">{{item.name}}</view>
+        <view class="mode-desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="disclaimer">本工具非医疗器械，测量值仅供参考，不做医学诊断。请遵医嘱。</view>
+</view>

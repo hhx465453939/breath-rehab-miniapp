@@ -1,0 +1,64 @@
+<view class="container">
+  <!-- 训练中 -->
+  <view class="card" wx:if="{{!finished}}">
+    <view class="mode-bar">
+      <text class="mode-name">{{modeText}}</text>
+      <text class="timer">{{elapsed}}s</text>
+    </view>
+
+    <!-- 蜡烛动画（candle 模式 5 根；其他模式 1 根） -->
+    <view class="candle-box">
+      <view class="candle {{candleLevel >= 3 ? 'out' : ''}}" wx:for="{{candles}}" wx:key="index" wx:if="{{mode === 'candle'}}">
+        <view class="flame {{candleLevel >= 2 ? 'flame-big' : candleLevel === 1 ? 'flame-small' : ''}}" wx:if="{{index < candleLevel}}"></view>
+        <view class="wick"></view>
+      </view>
+      <view class="candle {{candleLevel >= 3 ? 'out' : ''}}" wx:if="{{mode !== 'candle'}}">
+        <view class="flame {{candleLevel >= 2 ? 'flame-big' : candleLevel === 1 ? 'flame-small' : ''}}"></view>
+        <view class="wick"></view>
+      </view>
+    </view>
+
+    <!-- 节奏模式提示 -->
+    <view class="rhythm-tip" wx:if="{{mode === 'rhythm'}}">{{rhythmText}}</view>
+
+    <view class="db-display">{{currentDb}}<text class="db-unit">dB</text></view>
+    <view class="stats-row">
+      <view class="stat"><text class="stat-num">{{peakDb}}</text><text class="stat-label">峰值dB</text></view>
+      <view class="stat"><text class="stat-num">{{activeSec}}</text><text class="stat-label">有效吹气s</text></view>
+      <view class="stat"><text class="stat-num">{{breathCount}}</text><text class="stat-label">次数</text></view>
+    </view>
+
+    <view class="btn-primary" bindtap="endTrain">结束训练</view>
+  </view>
+
+  <!-- 结果 -->
+  <view class="card" wx:if="{{finished}}">
+    <view class="page-title">训练完成</view>
+    <view class="result-grid">
+      <view class="result-item">
+        <view class="result-num">{{result.peakDb}}</view>
+        <view class="result-label">峰值分贝</view>
+      </view>
+      <view class="result-item">
+        <view class="result-num">{{result.durationSec}}</view>
+        <view class="result-label">吹气时长(s)</view>
+      </view>
+      <view class="result-item">
+        <view class="result-num">{{result.stability}}</view>
+        <view class="result-label">稳定性(越小越好)</view>
+      </view>
+    </view>
+
+    <view class="vs-baseline" wx:if="{{result.vsBaseline}}">
+      <view class="vs-row"><text>比基线峰值</text><text class="{{result.vsBaseline.db >= 0 ? 'up' : 'down'}}">{{result.vsBaseline.db >= 0 ? '+' : ''}}{{result.vsBaseline.db}} dB</text></view>
+      <view class="vs-row"><text>比基线时长</text><text class="{{result.vsBaseline.dur >= 0 ? 'up' : 'down'}}">{{result.vsBaseline.dur >= 0 ? '+' : ''}}{{result.vsBaseline.dur}} s</text></view>
+    </view>
+    <view class="no-baseline" wx:else>尚未测基线，本次未计算相对差值</view>
+
+    <view class="coach-box">{{coachText}}</view>
+    <view class="disclaimer">本工具非医疗器械，测量值仅供参考，不做医学诊断。请遵医嘱。</view>
+
+    <view class="btn-primary" bindtap="saveAndHome">保存并返回</view>
+    <view class="btn-secondary" bindtap="trainAgain">再练一次</view>
+  </view>
+</view>
